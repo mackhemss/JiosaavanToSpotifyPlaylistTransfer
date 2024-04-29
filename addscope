@@ -2,9 +2,9 @@ import spotipy
 from spotipy.oauth2 import SpotifyOAuth
 
 # Spotify API credentials
-CLIENT_ID = 'your_client_id'
-CLIENT_SECRET = 'your_client_secret'
-REDIRECT_URI = 'your_redirect_uri'
+CLIENT_ID = '081cd4ac8df64a62b8a02257115a78a6'
+CLIENT_SECRET = 'ce37b10a077348319b21f33cebcda13b'
+REDIRECT_URI = 'https://localhost:3000/callback'
 
 # Scopes to request (including playlist-modify-private)
 SCOPE = 'playlist-modify-private'
