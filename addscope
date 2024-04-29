@@ -1,0 +1,41 @@
+import spotipy
+from spotipy.oauth2 import SpotifyOAuth
+
+# Spotify API credentials
+CLIENT_ID = 'your_client_id'
+CLIENT_SECRET = 'your_client_secret'
+REDIRECT_URI = 'your_redirect_uri'
+
+# Scopes to request (including playlist-modify-private)
+SCOPE = 'playlist-modify-private'
+
+# Create a SpotifyOAuth object with the desired scopes
+sp_oauth = SpotifyOAuth(client_id=CLIENT_ID, client_secret=CLIENT_SECRET, redirect_uri=REDIRECT_URI, scope=SCOPE)
+
+# Get authorization URL
+auth_url = sp_oauth.get_authorize_url()
+
+print("Please visit this URL to authorize your app:", auth_url)
+
+# After the user authorizes the app, get the authorization code from the redirect URI
+authorization_code = input("Enter the authorization code from the URL: ")
+
+# Exchange the authorization code for access and refresh tokens
+token_info = sp_oauth.get_access_token(authorization_code)
+print(token_info)
+# Use the access token to make authenticated requests to the Spotify API
+if token_info:
+    access_token = token_info['access_token']
+    sp = spotipy.Spotify(auth=access_token)
+    
+    # Get current user's information
+    user_info = sp.current_user()
+    user_id = user_info['id']
+    print(user_id)
+    # Example: create a private playlist
+    playlist_name = 'My Private Playlist'
+    playlist = sp.user_playlist_create(user=user_id, name=playlist_name, public=False)
+    print(playlist)
+    print(f"Private playlist '{playlist_name}' created successfully!")
+else:
+    print("Failed to obtain access token.")
