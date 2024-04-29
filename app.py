@@ -3,12 +3,13 @@ import spotipy
 from spotipy.oauth2 import SpotifyOAuth
 from bs4 import BeautifulSoup
 # Spotify API credentials
-CLIENT_ID = '081cd4ac8df64a62b8a02257115a78a6'
-CLIENT_SECRET = 'ce37b10a077348319b21f33cebcda13b'
+CLIENT_ID = ''
+CLIENT_SECRET = ''
 REDIRECT_URI = 'https://localhost:3000/callback'
 # Scopes to request (including playlist-modify-private)
 SCOPE = 'playlist-modify-private'
 # Function to scrape JioSaavn playlist and extract song details
+
 def scrape_jiosaavn_playlist(playlist_url):
     song_details = []
     response = requests.get(playlist_url)
